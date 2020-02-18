@@ -1,14 +1,14 @@
 package pl.kolban.SpringCarRental.service;
 
 import org.springframework.stereotype.Service;
-import pl.kolban.SpringCarRental.BlogRepository;
+import pl.kolban.SpringCarRental.repository.CarRepository;
 
 @Service
 public class CarService {
 
-    BlogRepository blogRepository;
+    CarRepository blogRepository;
 
-    public CarService(BlogRepository blogRepository) {
+    public CarService(CarRepository blogRepository) {
         this.blogRepository = blogRepository;
     }
 

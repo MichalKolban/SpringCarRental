@@ -1,0 +1,18 @@
+.paragraph{
+    font-size: 20px;
+    line-height: 20px;
+    font-family: 'Tomorrow', sans-serif;
+}
+
+.paragraph2{
+    font-size: 15px;
+    line-height: 20px;
+    font-family: 'Tomorrow', sans-serif;
+}
+
+.paragraphBold{
+    font-size: 30px;
+    line-height: 30px;
+    font-family: 'Tomorrow', sans-serif;
+    font-weight: bold;
+}

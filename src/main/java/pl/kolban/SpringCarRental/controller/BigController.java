@@ -2,50 +2,38 @@ package pl.kolban.SpringCarRental.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.kolban.SpringCarRental.BlogRepository;
+import pl.kolban.SpringCarRental.repository.CarRepository;
 import pl.kolban.SpringCarRental.model.CarModel;
 import pl.kolban.SpringCarRental.model.CarTypeModel;
 import pl.kolban.SpringCarRental.service.CarService;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @RestController
 public class BigController {
 
-    BlogRepository blogRepository;
+    CarRepository blogRepository;
 
     CarTypeModel carTypeModel;
 
     CarService carService;
 
     @Autowired
-    public BigController(BlogRepository blogRepository, CarService carService) {
+    public BigController(CarRepository blogRepository, CarService carService) {
         this.blogRepository = blogRepository;
         this.carService = carService;
     }
 
-    @RequestMapping("/")
-    public String hello() {
-        return "Server started " + LocalTime.now();
-    }
+//    @RequestMapping("/")
+//    public String hello() {
+//        return "Server started " + LocalTime.now();
+//    }
 
     @GetMapping("/all")
     public List<CarModel> allCars() {
         return blogRepository.findAll();
     }
 
-//    @GetMapping("/all/{id}")
-//    public Object findCarById(@PathVariable String id) {
-//        int idCar = Integer.parseInt(id);
-//        Object carId = blogRepository.findById(idCar);
-//
-//        if (carId != null) {
-//            return carId;
-//        } else {
-//            return null;
-//        }
-//    }
 
     @GetMapping("/all/{id}")
     public Object findCarById(@PathVariable String id){
@@ -91,7 +79,7 @@ public class BigController {
         return carList;
     }
 
-    
+
 
     private CarTypeModel carTypeExists(String str) {
         for (CarTypeModel carObject : CarTypeModel.values()) {
