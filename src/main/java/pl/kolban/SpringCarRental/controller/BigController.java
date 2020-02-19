@@ -16,8 +16,8 @@ public class BigController {
     CarService carService;
 
     @Autowired
-    public BigController(CarRepository blogRepository, CarService carService) {
-        this.carRepository = blogRepository;
+    public BigController(CarRepository carRepository, CarService carService) {
+        this.carRepository = carRepository;
         this.carService = carService;
     }
 
@@ -29,23 +29,37 @@ public class BigController {
 
     // car object based on id
     @GetMapping("/all/{id}")
-    public CarModel findCarTEST(@PathVariable String id) {
+    public CarModel findCar(@PathVariable String id) {
         CarModel car = carService.findCar(id);
         return car;
     }
 
+    // list of cars based on car brand
+    @GetMapping("/all/brand/{carBrand}")
+    public List<CarModel> findBrand(@PathVariable String carBrand){
+        List<CarModel> carBrandList = carService.findCarsBasedOnBrand(carBrand);
+        return carBrandList;
+    }
+
     // car object based on plate number
     @GetMapping("/platenumber/{plateNumber}")
-    public CarModel findCarPlateNumberTEST(@PathVariable String plateNumber){
+    public CarModel findCarPlateNumber(@PathVariable String plateNumber) {
         CarModel carModel = carService.findCarByPlateNumber(plateNumber);
-        return  carModel;
+        return carModel;
     }
 
     // list of cars based on carType
     @GetMapping("/type/{carType}")
-    public List<CarModel> findCarsBasedOnType(@PathVariable String carType){
-        List<CarModel> carTypeList =  carService.findCarsBasedOnType(carType);
+    public List<CarModel> findCarsBasedOnType(@PathVariable String carType) {
+        List<CarModel> carTypeList = carService.findCarsBasedOnType(carType);
         return carTypeList;
+    }
+
+    // add Car to repository
+    @PostMapping("/add")
+    public String addNewCar(@RequestBody CarModel carModel){
+        String saved = carService.addNewCar(carModel);
+        return saved;
     }
 
 }

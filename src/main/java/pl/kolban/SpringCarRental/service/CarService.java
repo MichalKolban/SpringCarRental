@@ -51,6 +51,27 @@ public class CarService {
         return carModelByCarType;
     }
 
+    public List<CarModel> findCarsBasedOnBrand(String carBrand) {
+        String carbrand = stringUtils.checkSring(carBrand);
+        List<CarModel> carBrandList = carRepository.findCarModelByCarBrand(carbrand);
+        return carBrandList;
+    }
+
+    public String addNewCar(CarModel carModel) {
+        String plateNumber = stringUtils.checkSring(carModel.getCarPlateNumber());
+        carModel.setCarBrand(carModel.getCarBrand().toUpperCase());
+        boolean exists = carRepository.existsByCarPlateNumber(plateNumber);
+        if (!exists) {
+            carRepository.save(carModel);
+            return "car saved.";
+        } else {
+            log.info("CarService.addNewCar() : " + carModel);
+            return "car with plateNumber " + plateNumber + " already exists";
+        }
+    }
+
+
+
 
     // == PRIVATE METHODS == //
 
@@ -60,6 +81,7 @@ public class CarService {
                 return carObject;
             }
         }
+        log.info("Requested o carType= " + str);
         return null;
     }
 
