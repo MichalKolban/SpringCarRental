@@ -1,7 +1,7 @@
 # SpringCarRental
 Spring Car Rental application
 
-JAVA 8 / Spring
+JAVA 8 / Spring / MySQL 8.0
 
 REST :
 
