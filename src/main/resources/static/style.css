@@ -16,3 +16,10 @@
     font-family: 'Tomorrow', sans-serif;
     font-weight: bold;
 }
+
+#clock{
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
