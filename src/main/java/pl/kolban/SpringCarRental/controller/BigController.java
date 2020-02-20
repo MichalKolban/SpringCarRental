@@ -62,4 +62,25 @@ public class BigController {
         return saved;
     }
 
+    // list of all avaliable cars
+    @GetMapping("/avaliable/all")
+    public List<CarModel> avaliable(){
+        List<CarModel> avaliableCarsList = carService.getAllAvaliableCars();
+        return avaliableCarsList;
+    }
+
+    // list of all avaliable cars based on brand
+    @GetMapping("/avaliable/{brand}")
+    public List<CarModel> avaliableModels(@PathVariable String brand) {
+        List<CarModel> avaliableModelsList = carService.getAllAvaliableModels(brand);
+        return avaliableModelsList;
+    }
+
+    // delete car based on plateNumber
+    @DeleteMapping("/delete")
+    public String deleteCar(@RequestBody CarModel carModel){
+        String response = carService.deleteCar(carModel.getCarPlateNumber());
+        return response;
+    }
+
 }

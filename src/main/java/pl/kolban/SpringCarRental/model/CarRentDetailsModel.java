@@ -51,8 +51,6 @@ public class CarRentDetailsModel {
         this.carRentDetailsId = carRentDetailsId;
     }
 
-
-
     public Double getCostPerDay() {
         return costPerDay;
     }

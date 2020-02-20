@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<CarModel, Integer> {
 
-
     CarModel findCarByCarPlateNumber(String plateNumber);
     List<CarModel> findCarModelByCarType(CarTypeModel carType);
     CarModel findCarByCarId(Integer carId);
@@ -19,8 +18,15 @@ public interface CarRepository extends JpaRepository<CarModel, Integer> {
     boolean existsByCarPlateNumber(String plateNumber);
 
 
-//    @Query("SELECT car_id, car_brand, car_model, car_plate_number, car_type FROM car_info WHERE car_id IN " +
-//            " (SELECT car_info_id FROM car_rent_details WHERE avaliable_to_rent = true)")
-//    List<CarModel> queryCarModelBy();
+    @Query( value = " SELECT car_id, car_brand, car_model, car_plate_number, car_type FROM car_info WHERE car_id IN " +
+            " (SELECT car_info_id FROM car_rent_details WHERE avaliable_to_rent = true) ", nativeQuery = true)
+    List<CarModel> findAllAvaliableCars();
+
+    @Query(value = "SELECT c.car_id, c.car_brand, c.car_model, c.car_plate_number, c.car_type FROM car_info c WHERE c.car_brand = ?1 AND car_id IN " +
+            " (SELECT car_info_id FROM car_rent_details WHERE avaliable_to_rent = true)", nativeQuery = true)
+    List<CarModel> findAllAvaliableModels(String carBrand);
+
+
+
 
 }

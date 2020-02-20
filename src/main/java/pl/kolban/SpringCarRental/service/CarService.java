@@ -61,6 +61,9 @@ public class CarService {
         String plateNumber = stringUtils.checkSring(carModel.getCarPlateNumber());
         carModel.setCarBrand(carModel.getCarBrand().toUpperCase());
         boolean exists = carRepository.existsByCarPlateNumber(plateNumber);
+
+        // check if carType match !!!
+
         if (!exists) {
             carRepository.save(carModel);
             return "car saved.";
@@ -70,7 +73,33 @@ public class CarService {
         }
     }
 
+    public List<CarModel> getAllAvaliableCars() {
+        List<CarModel> avaliableCars = carRepository.findAllAvaliableCars();
+        return avaliableCars;
+    }
 
+    public List<CarModel> getAllAvaliableModels(String model){
+        String brand = stringUtils.checkSring(model);
+        List<CarModel> avaliableModels = carRepository.findAllAvaliableModels(brand);
+        return avaliableModels;
+    }
+
+    public String deleteCar(String plateNumber) {
+        try {
+            CarModel cartoDelete = findCarByPlateNumber(plateNumber);
+
+            if (cartoDelete != null) {
+                carRepository.delete(cartoDelete);
+                return "car successfully deleted";
+            } else {
+                return "Car with plateNumber : " + plateNumber + " doesn't exists";
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            log.error("CarService.deleteCar() : " + e);
+        }
+        return "Car with plateNumber : " + plateNumber + " doesn't exists";
+    }
 
 
     // == PRIVATE METHODS == //
@@ -84,5 +113,4 @@ public class CarService {
         log.info("Requested o carType= " + str);
         return null;
     }
-
 }
