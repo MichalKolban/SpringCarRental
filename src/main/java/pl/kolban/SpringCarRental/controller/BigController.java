@@ -62,17 +62,17 @@ public class BigController {
         return saved;
     }
 
-    // list of all avaliable cars
-    @GetMapping("/avaliable/all")
+    // list of all available cars
+    @GetMapping("/available/all")
     public List<CarModel> avaliable(){
-        List<CarModel> avaliableCarsList = carService.getAllAvaliableCars();
-        return avaliableCarsList;
+        List<CarModel> availableCarsList = carService.getAllAvailableCars();
+        return availableCarsList;
     }
 
-    // list of all avaliable cars based on brand
+    // list of all available cars based on brand
     @GetMapping("/avaliable/{brand}")
     public List<CarModel> avaliableModels(@PathVariable String brand) {
-        List<CarModel> avaliableModelsList = carService.getAllAvaliableModels(brand);
+        List<CarModel> avaliableModelsList = carService.getAllAvailableModels(brand);
         return avaliableModelsList;
     }
 

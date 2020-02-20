@@ -73,15 +73,15 @@ public class CarService {
         }
     }
 
-    public List<CarModel> getAllAvaliableCars() {
-        List<CarModel> avaliableCars = carRepository.findAllAvaliableCars();
-        return avaliableCars;
+    public List<CarModel> getAllAvailableCars() {
+        List<CarModel> availableCars = carRepository.findAllAvailableCars();
+        return availableCars;
     }
 
-    public List<CarModel> getAllAvaliableModels(String model){
+    public List<CarModel> getAllAvailableModels(String model){
         String brand = stringUtils.checkSring(model);
-        List<CarModel> avaliableModels = carRepository.findAllAvaliableModels(brand);
-        return avaliableModels;
+        List<CarModel> availableModels = carRepository.findAllAvailableModels(brand);
+        return availableModels;
     }
 
     public String deleteCar(String plateNumber) {
