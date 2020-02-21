@@ -83,4 +83,12 @@ public class BigController {
         return response;
     }
 
+    // update Car parameters
+    @PostMapping("/update")
+    public String updateCarParameters(@RequestBody CarModel carModel){
+        String updated = carService.updateCarParameters(carModel);
+        return updated;
+    }
+
+
 }

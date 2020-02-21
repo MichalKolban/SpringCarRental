@@ -46,7 +46,7 @@ public class CarService {
 
     public List<CarModel> findCarsBasedOnType(String carType) {
         String type = stringUtils.checkSring(carType);
-        CarTypeModel carTypeModel = carTypeExists(type);
+        CarTypeModel carTypeModel = carTypeExistsObj(type);
         List<CarModel> carModelByCarType = carRepository.findCarModelByCarType(carTypeModel);
         return carModelByCarType;
     }
@@ -101,16 +101,76 @@ public class CarService {
         return "Car with plateNumber : " + plateNumber + " doesn't exists";
     }
 
+    public String updateCarParameters(CarModel carModel){
+
+        String plateNumber = null;
+        String brand = null;
+        String model = null;
+        String carType = null;
+
+        CarModel oldCar = carRepository.findCarByCarId(carModel.getCarId());
+        int id = carModel.getCarId();
+
+        if(carModel.getCarPlateNumber() != null) {
+            plateNumber = carModel.getCarPlateNumber();
+            plateNumber = stringUtils.checkSring(plateNumber);
+        }
+        if(carModel.getCarBrand() != null) {
+            brand = carModel.getCarBrand();
+        }
+        if(carModel.getCarModel() != null) {
+            model = carModel.getCarModel();
+        }
+        if(carModel.getCarType() != null){
+            String type = (carModel.getCarType().toString()).toUpperCase();
+            carType = carTypeExist(type);
+        }
+
+        String updatePlateNumber = validateNewCarParameters(oldCar.getCarPlateNumber(), plateNumber);
+        String updateCarBrand = validateNewCarParameters(oldCar.getCarBrand(), brand);
+        String updateCarModel = validateNewCarParameters(oldCar.getCarModel(), model);
+        String updateCarType = validateNewCarParameters(oldCar.getCarType().toString(), carType);
+
+        int updateCar = carRepository.updateCar(id, updateCarBrand, updateCarModel, updatePlateNumber, updateCarType);
+
+        if(updateCar != 0){
+            return "Car updated.";
+        }
+        return null;
+    }
+
+
 
     // == PRIVATE METHODS == //
 
-    private CarTypeModel carTypeExists(String str) {
+    private String carTypeExist(String str){
         for (CarTypeModel carObject : CarTypeModel.values()) {
-            if (carObject.toString().equals(str)) {
+            if (carObject.toString().equals(str.toUpperCase())) {
+                return carObject.toString();
+            }
+        }
+        log.info("Requested o carType= " + str);
+        return null;
+    }
+
+    private CarTypeModel carTypeExistsObj(String str) {
+        for (CarTypeModel carObject : CarTypeModel.values()) {
+            if (carObject.toString().equals(str.toUpperCase())) {
                 return carObject;
             }
         }
         log.info("Requested o carType= " + str);
         return null;
     }
+
+
+    private String validateNewCarParameters(String oldParameter, String updateParameters) {
+        if (updateParameters != null) {
+            if (!updateParameters.equals(oldParameter)) {
+                return updateParameters;
+            }
+        }
+        return oldParameter;
+    }
+
 }
