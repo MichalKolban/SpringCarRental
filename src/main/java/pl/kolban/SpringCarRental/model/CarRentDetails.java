@@ -3,7 +3,7 @@ package pl.kolban.SpringCarRental.model;
 import javax.persistence.*;
 
 @Entity(name = "car_rent_details")
-public class CarRentDetailsModel {
+public class CarRentDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +12,7 @@ public class CarRentDetailsModel {
 
     @OneToOne
     @JoinColumn(name = "car_info_id")
-    private CarModel carInfoId;
+    private Car carInfoId;
 
     @Column(name = "cost_per_day")
     private Double costPerDay;
@@ -30,17 +30,17 @@ public class CarRentDetailsModel {
 //    private Car car;
 
 
-    public CarRentDetailsModel() {
+    public CarRentDetails() {
     }
 
-    public CarRentDetailsModel(double costPerDay, String rentStartDate, String rentEndDate, boolean avaliableToRent) {
+    public CarRentDetails(double costPerDay, String rentStartDate, String rentEndDate, boolean avaliableToRent) {
         this.costPerDay = costPerDay;
         this.rentStartDate = rentStartDate;
         this.rentEndDate = rentEndDate;
         this.avaliableToRent = true;
     }
 
-    public CarRentDetailsModel(CarRentDetailsModel carRentDetails) {
+    public CarRentDetails(CarRentDetails carRentDetails) {
     }
 
     public int getCarRentDetailsId() {
@@ -75,11 +75,11 @@ public class CarRentDetailsModel {
         this.rentEndDate = rentEndDate;
     }
 
-    public CarModel getCarInfoId() {
+    public Car getCarInfoId() {
         return carInfoId;
     }
 
-    public void setCarInfoId(CarModel carInfoId) {
+    public void setCarInfoId(Car carInfoId) {
         this.carInfoId = carInfoId;
     }
 

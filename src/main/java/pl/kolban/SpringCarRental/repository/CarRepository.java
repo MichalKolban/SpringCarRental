@@ -5,27 +5,27 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.kolban.SpringCarRental.model.CarModel;
-import pl.kolban.SpringCarRental.model.CarTypeModel;
+import pl.kolban.SpringCarRental.model.Car;
+import pl.kolban.SpringCarRental.model.CarType;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface CarRepository extends JpaRepository<CarModel, Integer> {
+public interface CarRepository extends JpaRepository<Car, Integer> {
 
 
-    CarModel findCarByCarPlateNumber(String plateNumber);
-    List<CarModel> findCarModelByCarType(CarTypeModel carType);
-    CarModel findCarByCarId(Integer carId);
-    List<CarModel> findCarModelByCarBrand(String carBrand);
+    Car findCarByCarPlateNumber(String plateNumber);
+    List<Car> findCarModelByCarType(CarType carType);
+    Car findCarByCarId(Integer carId);
+    List<Car> findCarModelByCarBrand(String carBrand);
     boolean existsByCarPlateNumber(String plateNumber);
 
     @Query(value = ALL_AVAILIABLE_CARS, nativeQuery = true)
-    List<CarModel> findAllAvailableCars();
+    List<Car> findAllAvailableCars();
 
     @Query(value = ALL_AVAILIABLE_MODELS, nativeQuery = true)
-    List<CarModel> findAllAvailableModels(String carBrand);
+    List<Car> findAllAvailableModels(String carBrand);
 
     @Modifying(clearAutomatically = true)
     @Transactional

@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.kolban.SpringCarRental.model.CarModel;
-import pl.kolban.SpringCarRental.model.CarTypeModel;
+import pl.kolban.SpringCarRental.model.Car;
+import pl.kolban.SpringCarRental.model.CarType;
 import pl.kolban.SpringCarRental.repository.CarRepository;
 import pl.kolban.SpringCarRental.utils.StringUtils;
 
@@ -26,9 +26,13 @@ public class CarService {
         this.stringUtils = stringUtils;
     }
 
-    public CarModel findCar(String id){
+//    public CarService() {
+//
+//    }
+
+    public Car findCar(String id){
         int idCar = Integer.valueOf(id);
-        CarModel carByCarId = carRepository.findCarByCarId(idCar);
+        Car carByCarId = carRepository.findCarByCarId(idCar);
         if(carByCarId != null){
             log.info("Requested car with id " + id);
             return carByCarId;
@@ -38,55 +42,55 @@ public class CarService {
         }
     }
 
-    public CarModel findCarByPlateNumber(String plateNumber) {
+    public Car findCarByPlateNumber(String plateNumber) {
         String number = stringUtils.checkSring(plateNumber);
-        CarModel carByCarPlateNumber = carRepository.findCarByCarPlateNumber(number);
+        Car carByCarPlateNumber = carRepository.findCarByCarPlateNumber(number);
         return carByCarPlateNumber;
     }
 
-    public List<CarModel> findCarsBasedOnType(String carType) {
+    public List<Car> findCarsBasedOnType(String carType) {
         String type = stringUtils.checkSring(carType);
-        CarTypeModel carTypeModel = carTypeExistsObj(type);
-        List<CarModel> carModelByCarType = carRepository.findCarModelByCarType(carTypeModel);
+        CarType carTypeModel = carTypeExistsObj(type);
+        List<Car> carModelByCarType = carRepository.findCarModelByCarType(carTypeModel);
         return carModelByCarType;
     }
 
-    public List<CarModel> findCarsBasedOnBrand(String carBrand) {
+    public List<Car> findCarsBasedOnBrand(String carBrand) {
         String carbrand = stringUtils.checkSring(carBrand);
-        List<CarModel> carBrandList = carRepository.findCarModelByCarBrand(carbrand);
+        List<Car> carBrandList = carRepository.findCarModelByCarBrand(carbrand);
         return carBrandList;
     }
 
-    public String addNewCar(CarModel carModel) {
-        String plateNumber = stringUtils.checkSring(carModel.getCarPlateNumber());
-        carModel.setCarBrand(carModel.getCarBrand().toUpperCase());
+    public String addNewCar(Car car) {
+        String plateNumber = stringUtils.checkSring(car.getCarPlateNumber());
+        car.setCarBrand(car.getCarBrand().toUpperCase());
         boolean exists = carRepository.existsByCarPlateNumber(plateNumber);
 
         // check if carType match !!!
 
         if (!exists) {
-            carRepository.save(carModel);
+            carRepository.save(car);
             return "car saved.";
         } else {
-            log.info("CarService.addNewCar() : " + carModel);
+            log.info("CarService.addNewCar() : " + car);
             return "car with plateNumber " + plateNumber + " already exists";
         }
     }
 
-    public List<CarModel> getAllAvailableCars() {
-        List<CarModel> availableCars = carRepository.findAllAvailableCars();
+    public List<Car> getAllAvailableCars() {
+        List<Car> availableCars = carRepository.findAllAvailableCars();
         return availableCars;
     }
 
-    public List<CarModel> getAllAvailableModels(String model){
+    public List<Car> getAllAvailableModels(String model){
         String brand = stringUtils.checkSring(model);
-        List<CarModel> availableModels = carRepository.findAllAvailableModels(brand);
+        List<Car> availableModels = carRepository.findAllAvailableModels(brand);
         return availableModels;
     }
 
     public String deleteCar(String plateNumber) {
         try {
-            CarModel cartoDelete = findCarByPlateNumber(plateNumber);
+            Car cartoDelete = findCarByPlateNumber(plateNumber);
 
             if (cartoDelete != null) {
                 carRepository.delete(cartoDelete);
@@ -101,28 +105,28 @@ public class CarService {
         return "Car with plateNumber : " + plateNumber + " doesn't exists";
     }
 
-    public String updateCarParameters(CarModel carModel){
+    public String updateCarParameters(Car car){
 
         String plateNumber = null;
         String brand = null;
         String model = null;
         String carType = null;
 
-        CarModel oldCar = carRepository.findCarByCarId(carModel.getCarId());
-        int id = carModel.getCarId();
+        Car oldCar = carRepository.findCarByCarId(car.getCarId());
+        int id = car.getCarId();
 
-        if(carModel.getCarPlateNumber() != null) {
-            plateNumber = carModel.getCarPlateNumber();
+        if(car.getCarPlateNumber() != null) {
+            plateNumber = car.getCarPlateNumber();
             plateNumber = stringUtils.checkSring(plateNumber);
         }
-        if(carModel.getCarBrand() != null) {
-            brand = carModel.getCarBrand();
+        if(car.getCarBrand() != null) {
+            brand = car.getCarBrand();
         }
-        if(carModel.getCarModel() != null) {
-            model = carModel.getCarModel();
+        if(car.getCarModel() != null) {
+            model = car.getCarModel();
         }
-        if(carModel.getCarType() != null){
-            String type = (carModel.getCarType().toString()).toUpperCase();
+        if(car.getCarType() != null){
+            String type = (car.getCarType().toString()).toUpperCase();
             carType = carTypeExist(type);
         }
 
@@ -144,7 +148,7 @@ public class CarService {
     // == PRIVATE METHODS == //
 
     private String carTypeExist(String str){
-        for (CarTypeModel carObject : CarTypeModel.values()) {
+        for (CarType carObject : CarType.values()) {
             if (carObject.toString().equals(str.toUpperCase())) {
                 return carObject.toString();
             }
@@ -153,8 +157,8 @@ public class CarService {
         return null;
     }
 
-    private CarTypeModel carTypeExistsObj(String str) {
-        for (CarTypeModel carObject : CarTypeModel.values()) {
+    private CarType carTypeExistsObj(String str) {
+        for (CarType carObject : CarType.values()) {
             if (carObject.toString().equals(str.toUpperCase())) {
                 return carObject;
             }
@@ -164,10 +168,10 @@ public class CarService {
     }
 
 
-    private String validateNewCarParameters(String oldParameter, String updateParameters) {
-        if (updateParameters != null) {
-            if (!updateParameters.equals(oldParameter)) {
-                return updateParameters;
+    private String validateNewCarParameters(String oldParameter, String updateParameter) {
+        if (updateParameter != null) {
+            if (!updateParameter.equals(oldParameter)) {
+                return updateParameter;
             }
         }
         return oldParameter;

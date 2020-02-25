@@ -3,7 +3,7 @@ package pl.kolban.SpringCarRental.model;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
-public enum CarTypeModel {
+public enum CarType {
 
     SUV,
     SPORT,

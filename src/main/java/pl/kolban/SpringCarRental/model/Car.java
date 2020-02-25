@@ -3,7 +3,7 @@ package pl.kolban.SpringCarRental.model;
 import javax.persistence.*;
 
 @Entity(name = "car_info")
-public class CarModel {
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,23 +17,23 @@ public class CarModel {
     private String carPlateNumber;
     @Column(name = "car_type")
     @Enumerated(EnumType.STRING)
-    public CarTypeModel carType;
+    public CarType carType;
 
     @OneToOne(mappedBy = "carInfoId", cascade = CascadeType.ALL)
-    private CarRentDetailsModel carRentDetails;
+    private CarRentDetails carRentDetails;
 
-    public CarModel() {
+    public Car() {
     }
 
-    public CarModel(String carBrand, String carModel, String carPlateNumber, CarTypeModel carType, CarRentDetailsModel carRentDetails) {
+    public Car(String carBrand, String carModel, String carPlateNumber, CarType carType, CarRentDetails carRentDetails) {
         this.carBrand = carBrand;
         this.carModel = carModel;
         this.carPlateNumber = carPlateNumber;
         this.carType = carType;
-        this.carRentDetails = new CarRentDetailsModel(carRentDetails);
+        this.carRentDetails = new CarRentDetails(carRentDetails);
     }
 
-    public CarModel(String carBrand, String carModel, String carPlateNumber, CarTypeModel carType) {
+    public Car(String carBrand, String carModel, String carPlateNumber, CarType carType) {
         this.carBrand = carBrand;
         this.carModel = carModel;
         this.carPlateNumber = carPlateNumber;
@@ -60,11 +60,11 @@ public class CarModel {
         this.carModel = carModel;
     }
 
-    public CarTypeModel getCarType() {
+    public CarType getCarType() {
         return carType;
     }
 
-    public void setCarType(CarTypeModel carType) {
+    public void setCarType(CarType carType) {
         this.carType = carType;
     }
 
