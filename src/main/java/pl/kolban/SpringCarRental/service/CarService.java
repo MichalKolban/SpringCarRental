@@ -26,9 +26,8 @@ public class CarService {
         this.stringUtils = stringUtils;
     }
 
-//    public CarService() {
-//
-//    }
+    public CarService() {
+    }
 
     public Car findCar(String id){
         int idCar = Integer.valueOf(id);
@@ -43,9 +42,15 @@ public class CarService {
     }
 
     public Car findCarByPlateNumber(String plateNumber) {
-        String number = stringUtils.checkSring(plateNumber);
-        Car carByCarPlateNumber = carRepository.findCarByCarPlateNumber(number);
-        return carByCarPlateNumber;
+        Car carByCarPlateNumber = null;
+        try {
+            String number = stringUtils.checkSring(plateNumber);
+            carByCarPlateNumber = carRepository.findCarByCarPlateNumber(number);
+            return carByCarPlateNumber;
+        } catch (NullPointerException e) {
+            log.error("CarService.findCarByPlateNumber : Requested plate number : " + plateNumber);
+        }
+        return null;
     }
 
     public List<Car> findCarsBasedOnType(String carType) {
@@ -105,42 +110,37 @@ public class CarService {
         return "Car with plateNumber : " + plateNumber + " doesn't exists";
     }
 
-    public String updateCarParameters(Car car){
+    public String updateCarParameters(Car car) {
 
-        String plateNumber = null;
-        String brand = null;
-        String model = null;
-        String carType = null;
+        Car carFromDB = findCarByPlateNumber(car.getCarPlateNumber());
+        if (carFromDB != null) {
+            int id = carFromDB.getCarId();
+            String plateNumber = stringUtils.checkSring(car.getCarPlateNumber());
+            String brand = car.getCarBrand();
+            String model = car.getCarModel();
 
-        Car oldCar = carRepository.findCarByCarId(car.getCarId());
-        int id = car.getCarId();
 
-        if(car.getCarPlateNumber() != null) {
-            plateNumber = car.getCarPlateNumber();
-            plateNumber = stringUtils.checkSring(plateNumber);
+            CarType updated;
+            String updatedCarType = null;
+
+            if(car.getCarType() != null){
+                updated = carTypeExistsObj(car.getCarType().toString().toUpperCase());
+                updatedCarType = updated.toString();
+            }
+
+            String updatePlateNumber = validateNewCarParameters(carFromDB.getCarPlateNumber(), plateNumber);
+            String updateCarBrand = validateNewCarParameters(carFromDB.getCarBrand(), brand);
+            String updateCarModel = validateNewCarParameters(carFromDB.getCarModel(), model);
+            String updateCarType = validateNewCarParameters(carFromDB.getCarType().toString(), updatedCarType);
+
+            int updateCar = carRepository.updateCar(id, updateCarBrand, updateCarModel, updatePlateNumber, updateCarType);
+
+            if (updateCar != 0) {
+                return "Car with id : " + carFromDB.getCarId() + " was updated.";
+            }
         }
-        if(car.getCarBrand() != null) {
-            brand = car.getCarBrand();
-        }
-        if(car.getCarModel() != null) {
-            model = car.getCarModel();
-        }
-        if(car.getCarType() != null){
-            String type = (car.getCarType().toString()).toUpperCase();
-            carType = carTypeExist(type);
-        }
-
-        String updatePlateNumber = validateNewCarParameters(oldCar.getCarPlateNumber(), plateNumber);
-        String updateCarBrand = validateNewCarParameters(oldCar.getCarBrand(), brand);
-        String updateCarModel = validateNewCarParameters(oldCar.getCarModel(), model);
-        String updateCarType = validateNewCarParameters(oldCar.getCarType().toString(), carType);
-
-        int updateCar = carRepository.updateCar(id, updateCarBrand, updateCarModel, updatePlateNumber, updateCarType);
-
-        if(updateCar != 0){
-            return "Car updated.";
-        }
-        return null;
+        log.info("CarService.updateCarParameters : requested for car with plate number " + car.getCarPlateNumber() + " who doesn't exists");
+        return "plate number " + car.getCarPlateNumber() + " doesn't exists";
     }
 
 
@@ -155,6 +155,16 @@ public class CarService {
         }
         log.info("Requested o carType= " + str);
         return null;
+    }
+
+    private boolean carTypeExistBools(String str){
+        for (CarType carObject : CarType.values()) {
+            if (carObject.toString().equals(str.toUpperCase())) {
+                return true;
+            }
+        }
+        log.error("Requested o carType= " + str);
+        return false;
     }
 
     private CarType carTypeExistsObj(String str) {
