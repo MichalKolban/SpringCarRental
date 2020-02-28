@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+</head>
+<body>
+
+<center><h1 class="paragraphBold">-- Car Rental --</h1>
+    <p class="paragraph"> SERVER STARTED : </p>
+    <p class="paragraph2" id="time"></p>
+
+<h1>Welcome</h1>
+<a th:href="@{/login}">Log IN</a>
+
+
+
+<br>
+<img src="racing-car.png">
+
+    </center>
+</body>
+</html>
+
+<script>
+    document.getElementById("time").innerHTML = Date();
+</script>

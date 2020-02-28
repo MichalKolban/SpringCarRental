@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+</head>
+<body>
+
+<h1>Jesteśmy na car by id !!</h1>
+<!--<tr>-->
+<!--    <th>Car id</th>-->
+<!--    <th>Car Brand</th>-->
+<!--    <th>Car Model</th>-->
+<!--    <th>Car Plate Number</th>-->
+<!--    <th>Car Type</th>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<tr th:each="carbyid : ${carbyid}">-->
+<!--    <td th:text="${carbyid.carId}">ID</td>-->
+<!--    <td th:text="${carbyid.carBrand}">CAR_BAND</td>-->
+<!--    <td th:text="${carbyid.carModel}">CAR_MODEL</td>-->
+<!--    <td th:text="${carbyid.carPlateNumber}">CAR_PLATE_NUMBER</td>-->
+<!--    <td th:text="${carbyid.carType}">CAR_TYPE</td>-->
+<!--</tr>-->
+
+<div class="container">
+
+    <div  th:if="${not #lists.isEmpty(carbyid)}">
+
+        <h1>Car List</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>Car id</th>
+                <th>Car Brand</th>
+                <th>Car Model</th>
+                <th>Car Plate Number</th>
+                <th>Car Type</th>
+            </tr>
+            <tr>
+            <tr th:each="carbyid : ${carbyid}">
+                <td th:text="${carbyid.carId}">ID</td>
+                <td th:text="${carbyid.carBrand}">CAR_BAND</td>
+                <td th:text="${carbyid.carModel}">CAR_MODEL</td>
+                <td th:text="${carbyid.carPlateNumber}">CAR_PLATE_NUMBER</td>
+                <td th:text="${carbyid.carType}">CAR_TYPE</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

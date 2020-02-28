@@ -1,6 +1,7 @@
 package pl.kolban.SpringCarRental.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kolban.SpringCarRental.repository.CarRepository;
 import pl.kolban.SpringCarRental.model.Car;
@@ -21,9 +22,24 @@ public class CarRequestController {
         this.carService = carService;
     }
 
+// test
+    @GetMapping("/test")
+    public String hello123(Model model){
+        model.addAttribute("Hello");
+        return "hello123";
+    }
+
+
+
     // list of all Cars
     @GetMapping("/all")
     public List<Car> allCars() {
+        return carRepository.findAll();
+    }
+
+    // list of all Cars TEST
+    @GetMapping("/test/all")
+    public List<Car> allCarsTEST() {
         return carRepository.findAll();
     }
 

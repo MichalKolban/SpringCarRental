@@ -1,6 +1,6 @@
 .paragraph{
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 60px;
+    line-height: 60px;
     font-family: 'Tomorrow', sans-serif;
 }
 
@@ -13,7 +13,8 @@
 .paragraphBold{
     font-size: 30px;
     line-height: 30px;
-    font-family: 'Tomorrow', sans-serif;
+    /*font-family: 'Tomorrow', sans-serif;*/
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
 
@@ -23,3 +24,13 @@
     text-align: center;
     font-family: 'Roboto', sans-serif;
 }
+
+h1{
+    color: coral;
+    font-family: 'Roboto', sans-serif;
+}
+
+divFont{
+    font-family: 'Roboto', sans-serif;
+}
+

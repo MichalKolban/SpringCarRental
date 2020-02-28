@@ -1,6 +1,5 @@
 package pl.kolban.SpringCarRental.model;
 
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 

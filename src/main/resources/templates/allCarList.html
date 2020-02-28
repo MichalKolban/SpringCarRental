@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+</head>
+<body>
+
+<h1 class="paragraphBold">Jesteśmy na car by id !!</h1>
+
+<tr th:each="carbyid : ${carbyid}">
+    <td th:text="${carbyid.carId}">ID</td>
+    <td th:text="${carbyid.carBrand}">CAR_BAND</td>
+    <td th:text="${carbyid.carModel}">CAR_MODEL</td>
+    <td th:text="${carbyid.carPlateNumber}">CAR_PLATE_NUMBER</td>
+    <td th:text="${carbyid.carType}">CAR_TYPE</td><br>
+</tr>
+
+</body>
+</html>
