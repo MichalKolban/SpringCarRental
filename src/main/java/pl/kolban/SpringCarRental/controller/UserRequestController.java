@@ -32,10 +32,10 @@ public class UserRequestController {
         return user;
     }
 
-    @PostMapping
-    public User udpateUser(@RequestBody User user){
-        return null;
-    }
+//    @PostMapping
+//    public User udpateUser(@RequestBody User user){
+//        return null;
+//    }
 
 
 

@@ -3,18 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Car</title>
+
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstap.min.js}"></script>
+
 </head>
 <body>
 
+<form method="post" action="/home">         <!-- button Back -->
+    <input type="submit" value="BACK3">
+</form>
+
 <h1 class="paragraphBold">Jesteśmy na car by id !!</h1>
 
-<tr th:each="carbyid : ${carbyid}">
-    <td th:text="${carbyid.carId}">ID</td>
-    <td th:text="${carbyid.carBrand}">CAR_BAND</td>
-    <td th:text="${carbyid.carModel}">CAR_MODEL</td>
-    <td th:text="${carbyid.carPlateNumber}">CAR_PLATE_NUMBER</td>
-    <td th:text="${carbyid.carType}">CAR_TYPE</td><br>
-</tr>
+<form method="post" action="/home">         <!-- button Back -->
+    <input type="submit" value="BACK">
+</form>
 
+
+<h1>Car List</h1>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Car id</th>
+            <th>Car Brand</th>
+            <th>Car Model</th>
+            <th>Car Plate Number</th>
+            <th>Car Type</th>
+        </tr>
+        <tr>
+        <tr th:each="carbyid : ${carbyid}">
+            <td th:text="${carbyid.carId}">ID</td>
+            <td th:text="${carbyid.carBrand}">CAR_BAND</td>
+            <td th:text="${carbyid.carModel}">CAR_MODEL</td>
+            <td th:text="${carbyid.carPlateNumber}">CAR_PLATE_NUMBER</td>
+            <td th:text="${carbyid.carType}">CAR_TYPE</td>
+        </tr>
+    </table>
+</div>
+
+
+<form method="post" action="/home">         <!-- button Back -->
+    <input type="submit" value="BACK2">
+</form>
 </body>
 </html>

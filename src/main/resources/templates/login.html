@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Login Page</title>
 </head>
-<body>
+<body th:align="center">
 
     <h1>Login form</h1>
     <form th:action="@{/login}" th:object="${loginForm}" method="post">
@@ -14,6 +14,7 @@
         <label for="password">Username</label>
         <input type="password" id="password" name="password" />
         <br/>
+        <br>
         <input type="submit" value="Log in"/>
 
     </form>

@@ -7,6 +7,9 @@
 <body>
 
 <h1>Jesteśmy na car by id !!</h1>
+
+
+
 <!--<tr>-->
 <!--    <th>Car id</th>-->
 <!--    <th>Car Brand</th>-->
@@ -26,6 +29,10 @@
 <div class="container">
 
     <div  th:if="${not #lists.isEmpty(carbyid)}">
+        <form method="get" action="/carcar">
+            <input type="text" name="name">
+            <input type="submit" value="Get Car By car Id">
+        </form>
 
         <h1>Car List</h1>
         <table class="table table-striped">
@@ -47,6 +54,12 @@
         </table>
     </div>
 </div>
+
+<br>
+
+<form method="post" action="/home">         <!-- button Back -->
+    <input type="submit" value="BACK">
+</form>
 
 </body>
 </html>

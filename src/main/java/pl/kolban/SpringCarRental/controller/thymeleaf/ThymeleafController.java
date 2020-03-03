@@ -1,4 +1,4 @@
-package pl.kolban.SpringCarRental.controller;
+package pl.kolban.SpringCarRental.controller.thymeleaf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

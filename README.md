@@ -1,13 +1,14 @@
 # SpringCarRental
 Spring Car Rental application
 
-#### JAVA 8 / Spring Boot / MySQL 8.0
+#### JAVA 8 / Spring Boot / MySQL 8.0 / Thymeleaf
+
 
 # REST :
 
 #### @GET
 
-###### `/car/all ` list of all cars                   
+###### `/car/all` list of all cars                   
 
 ###### `/car/{id}` car based on id
 
@@ -19,20 +20,26 @@ Spring Car Rental application
 
 ###### `/car/available/all`      list of all available cars (not reserved yet)
 
-###### `/car/availiable/{brand}` list of all avaliable cars specyfic brand
+###### `/car/availiable/{brand}` list of all available cars based on the brand
 
 ###### `/user/all` list of all users
 
 #### @POST
 
-###### `/car/add` json {}
+###### `/car/add` json { "carBrand": "carModel": "carPlateNumber": "carType": }
 
-###### `/car/update` json minimal required {"carBrand" : , "carPlateNumber" : }    (id is immutable)
+###### `/car/update` json minimal required {"carBrand" :  "carPlateNumber" : }    (id is immutable)
 
 #### @DELETE
 
 ###### `/car/delete`
 
+# MySQL :
 
+##### script added: `car_rent_script_03.03.sql`
+
+# THYMELEAF :
+
+##### in progress...
 
 
