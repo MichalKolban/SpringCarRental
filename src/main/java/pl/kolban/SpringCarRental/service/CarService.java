@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kolban.SpringCarRental.model.Car;
 import pl.kolban.SpringCarRental.model.CarType;
+import pl.kolban.SpringCarRental.model.projections.CarPriceAvaliableToRent;
 import pl.kolban.SpringCarRental.repository.CarRepository;
 import pl.kolban.SpringCarRental.utils.StringUtils;
 
@@ -19,6 +20,7 @@ public class CarService {
 
     CarRepository carRepository;
     StringUtils stringUtils;
+
 
     @Autowired
     public CarService(CarRepository carRepository, StringUtils stringUtils) {
@@ -143,6 +145,13 @@ public class CarService {
         return "plate number " + car.getCarPlateNumber() + " doesn't exists";
     }
 
+
+    public List<CarPriceAvaliableToRent> allAvaliablePriceCarList() {
+
+        List<CarPriceAvaliableToRent> allByAvaliablePrice = carRepository.findAllByAvaliableAndPrice();
+
+        return allByAvaliablePrice;
+    }
 
 
     // == PRIVATE METHODS == //

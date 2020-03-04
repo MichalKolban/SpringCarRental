@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />  <!-- ładuje css y -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>                       <!-- namiary na pliki javascriptowe -->
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstap.min.js}"></script>
+</head>
+<body>
+
+<br>
+<br>
+
+<h1 align="center" class="h1topic">Car List</h1>
+
+<br>
+<br>
+<br>
+
+
+<div class="container">
+
+    <!--    <div  th:if="${not #lists.isEmpty(carbyid)}">-->
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Car id</th>
+            <th>Car Brand</th>
+            <th>Car Model</th>
+            <th>Car Plate Number</th>
+            <th>Car Type</th>
+            <th>Avaliable to Rent</th>
+            <th>Cost per day</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${carList}">
+            <td th:text="${car.getCarId()}">ID</td>
+            <td th:text="${car.getCarBrand()}">CAR_BAND</td>
+            <td th:text="${car.getCarModel()}">CAR_MODEL</td>
+            <td th:text="${car.getCarPlateNumber()}">CAR_PLATE_NUMBER</td>
+            <td th:text="${car.getCarType()}">CAR_TYPE</td>
+            <td th:text="${car.isAvaliableToRent()}">AVALIABLE_TO_RENT</td>
+            <td th:text="${car.getCostPerDay()}">COST_PER_DAY</td>
+        </tr>
+        </tbody>
+    </table>
+    <!--    </div>-->
+</div>
+
+</body>
+</html>

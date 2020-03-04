@@ -19,8 +19,8 @@ public class Car {
     @Enumerated(EnumType.STRING)
     public CarType carType;
 
-    @OneToOne(mappedBy = "carInfoId", cascade = CascadeType.ALL)
-    private CarRentDetails carRentDetails;
+//    @OneToOne(mappedBy = "carInfoId", cascade = CascadeType.ALL)
+//    private CarRentDetails carRentDetails;
 
     public Car() {
     }
@@ -30,7 +30,7 @@ public class Car {
         this.carModel = carModel;
         this.carPlateNumber = carPlateNumber;
         this.carType = carType;
-        this.carRentDetails = new CarRentDetails(carRentDetails);
+//        this.carRentDetails = new CarRentDetails(carRentDetails);
     }
 
     public Car(String carBrand, String carModel, String carPlateNumber, CarType carType) {

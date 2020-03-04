@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kolban.SpringCarRental.model.Car;
+import pl.kolban.SpringCarRental.model.projections.CarPriceAvaliableToRent;
 import pl.kolban.SpringCarRental.repository.CarRepository;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ThymeleafCar {
 
     @GetMapping("/carbyid")
     public String getId(Model model){
-        Car carbyId = carRepository.findCarByCarId(11);
+        Car carbyId = carRepository.findCarByCarId(11);   // for now hard coded
         model.addAttribute("carbyid", carbyId);
         System.out.println(carbyId.toString());
         return "carbyid";
@@ -38,29 +39,26 @@ public class ThymeleafCar {
     }
 
 
-
-
-//    @GetMapping("/allCarList")
-//    public String getAll(Model model){
-//        List<Car> carList = carRepository.findAll();
-//        model.addAttribute("carbyid", carList);
-//        System.out.println(carList.toString());
-//        return "allCarList";
-//    }
-
-    //TEST
     @GetMapping("/allCarList")
-    public String getAllTEST(Model model){
+    public String getAllCars(Model model){
         List<Car> carList = carRepository.findAll();
-        model.addAttribute("carbyid", carList);
+        model.addAttribute("carList", carList);
         System.out.println(carList.toString());
-        return "TEST";
+        return "allCarList";
+    }
+
+    @GetMapping("/allPriceCarList")
+    public String getAllPrice(Model model){
+        List<CarPriceAvaliableToRent> carList = carRepository.findAllByAvaliableAndPrice();
+        model.addAttribute("carList", carList);
+        System.out.println(carList.toString());
+        return "allPriceCarList";
     }
 
     @RequestMapping("/addnewcar")
     public String createNewCar(Model model){
         model.addAttribute("newcar", new Car());
-        return "TEST";
+        return "allCarList";
     }
 
 

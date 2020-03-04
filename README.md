@@ -22,6 +22,8 @@ Spring Car Rental application
 
 ###### `/car/availiable/{brand}` list of all available cars based on the brand
 
+###### `/rent/avaliable` list of all avaliable cars included price and boolean if is avaliable
+
 ###### `/user/all` list of all users
 
 #### @POST

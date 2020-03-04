@@ -3,50 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Car</title>
-
-
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
-    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />  <!-- ładuje css y -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>                       <!-- namiary na pliki javascriptowe -->
     <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstap.min.js}"></script>
-
 </head>
 <body>
 
-<form method="post" action="/home">         <!-- button Back -->
-    <input type="submit" value="BACK3">
-</form>
+<br>
+<br>
 
-<h1 class="paragraphBold">Jesteśmy na car by id !!</h1>
+<h1 align="center" class="h1topic">Car List</h1>
 
-<form method="post" action="/home">         <!-- button Back -->
-    <input type="submit" value="BACK">
-</form>
+<br>
+<br>
+<br>
 
 
-<h1>Car List</h1>
 <div class="container">
-    <table class="table">
-        <tr>
-            <th>Car id</th>
-            <th>Car Brand</th>
-            <th>Car Model</th>
-            <th>Car Plate Number</th>
-            <th>Car Type</th>
-        </tr>
-        <tr>
-        <tr th:each="carbyid : ${carbyid}">
-            <td th:text="${carbyid.carId}">ID</td>
-            <td th:text="${carbyid.carBrand}">CAR_BAND</td>
-            <td th:text="${carbyid.carModel}">CAR_MODEL</td>
-            <td th:text="${carbyid.carPlateNumber}">CAR_PLATE_NUMBER</td>
-            <td th:text="${carbyid.carType}">CAR_TYPE</td>
-        </tr>
-    </table>
+
+<!--    <div  th:if="${not #lists.isEmpty(carbyid)}">-->
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Car id</th>
+                <th>Car Brand</th>
+                <th>Car Model</th>
+                <th>Car Plate Number</th>
+                <th>Car Type</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car : ${carList}">
+                <td th:text="${car.carId}">ID</td>
+                <td th:text="${car.carBrand}">CAR_BAND</td>
+                <td th:text="${car.carModel}">CAR_MODEL</td>
+                <td th:text="${car.carPlateNumber}">CAR_PLATE_NUMBER</td>
+                <td th:text="${car.carType}">CAR_TYPE</td>
+                <td>view detials</td>
+            </tr>
+            </tbody>
+        </table>
+<!--    </div>-->
 </div>
 
-
-<form method="post" action="/home">         <!-- button Back -->
-    <input type="submit" value="BACK2">
-</form>
 </body>
 </html>
