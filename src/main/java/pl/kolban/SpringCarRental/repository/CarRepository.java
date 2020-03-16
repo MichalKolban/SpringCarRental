@@ -48,7 +48,7 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
     String UPDATE_CAR = " UPDATE car_info c SET c.car_brand = :brand, c.car_model = :model, c.car_plate_number = :plateNumber, " +
             " c.car_type = :carType WHERE c.car_id = :id ";
 
-    String ALL_AVAILIABLE_CAR_LIST_PRICE = " SELECT c.car_id AS carId, c.car_brand AS carBrand, c.car_model AS carModel, " +
+    String ALL_AVAILIABLE_CAR_LIST_PRICE = " SELECT c.car_id AS carId, c.car_brand AS carBrand, c.car_model AS carModel," +
     "  c.car_plate_number AS carPlateNumber, c.car_type AS carType, crd.cost_per_day AS costPerDay, crd.avaliable_to_rent AS avaliableToRent" +
             " FROM car_info c " +
             " JOIN car_rent_details crd" +
